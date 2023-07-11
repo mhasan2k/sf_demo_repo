@@ -1,0 +1,41 @@
+# This is a basic workflow to help you get started with Actions
+name: PROD Deployment
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on any branch or tag commit 
+  push:
+    branches:
+      - main
+  
+  # Allows you to run this workflow manually from the Actions tab
+  # workflow_dispatch:  # uncomment this line when needed for manual run
+
+env:
+  SNOWSQL_DEST: ~/snowflake
+  SNOWSQL_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
+  SNOWSQL_USER: ${{ secrets.SF_USERNAME }}
+  SNOWSQL_PWD: ${{ secrets.SF_PASSWORD }}
+  SNOWSQL_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
+  SNOWSQL_ROLE: ${{ secrets.SF_ROLE }}
+  SNOWSQL_DATABASE: ${{ secrets.SF_DATABASE_PROD }}
+  SNOWSQL_SCHEMA: ${{ secrets.SF_SCHEMA }}
+  
+jobs:                         
+  deploy:                           
+    name: Create Tables                          
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Download SnowSQL
+      run:  curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.27-linux_x86_64.bash
+    - name: Install SnowSQL
+      run: SNOWSQL_DEST=~/snowflake SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.27-linux_x86_64.bash
+    - name: Test installation
+      run:  ~/snowflake/snowsql -v
+    - name: Execute Create Table SQLs
+      #run: ~/snowflake/snowsql -q "select current_warehouse(), current_database(), current_schema()"
+      working-directory: ./Base-Tables/CAMPROD
+      run:  ~/snowflake/snowsql -f ddl_create_tables.sql;
