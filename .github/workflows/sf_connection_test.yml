@@ -37,4 +37,4 @@ jobs:
       run:  ~/snowflake/snowsql -v
     - name: Execute SQL against Snowflake
       #run: ~/snowflake/snowsql -q "select current_warehouse(), current_database(), current_schema()"
-      run:  ~/snowflake/snowsql -f ddl_create_tables.sql;
+      run:  ~/snowflake/snowsql -f Base_tables/CAMPROD/ddl_create_tables.sql;
