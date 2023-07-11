@@ -18,7 +18,7 @@ env:
   SNOWSQL_PWD: ${{ secrets.SF_PASSWORD }}
   SNOWSQL_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
   SNOWSQL_ROLE: ${{ secrets.SF_ROLE }}
-  SNOWSQL_DATABASE: ${{ secrets.SF_DATABASE }}
+  SNOWSQL_DATABASE: ${{ secrets.SF_DATABASE_UAT }}
   SNOWSQL_SCHEMA: ${{ secrets.SF_SCHEMA }}
   
                                                
