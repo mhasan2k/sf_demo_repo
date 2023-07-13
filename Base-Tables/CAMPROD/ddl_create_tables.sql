@@ -19,4 +19,5 @@ insert into employees
 		(1006, 'Vipul', 'Diwan', 200000, '2020-06-14 09:00:00'::timestamp_ntz, 'Account'),
 		(1007, 'Satish', 'Kumar', 75000, '2020-01-14 09:00:00'::timestamp_ntz, 'Account'),
 		(1008, 'Geetika', 'Chauhan', 90000, '2011-04-14 09:00:00'::timestamp_ntz, 'Admin')
+		, (1009, 'Geetika2', 'Chauhan2', 90002, '2011-04-14 09:00:00'::timestamp_ntz, 'Admin')
 ;
